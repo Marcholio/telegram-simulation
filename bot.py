@@ -3,15 +3,16 @@ from telegram import Bot
 from telegram.ext import CommandHandler, Updater
 
 class TelegramBot:
-  def __init__(self, token):
+  def __init__(self, user, token):
     self.updater = Updater(token=token)
     self.bot = Bot(token)
+    self.user = user
     startHandler = CommandHandler('start', self.start)
     stopHandler = CommandHandler('stop', self.stop)
     self.updater.dispatcher.add_handler(startHandler)
     self.updater.dispatcher.add_handler(stopHandler)
     self.updater.start_polling()
-    self.chatId = 0
+    self.chatId = None
     
   def start(self, bot, update):
     self.chatId = update.message.chat.id
@@ -21,5 +22,5 @@ class TelegramBot:
     raise SystemExit
     
   def sendMessage(self, msg):
-    if self.chatId is not 0:
+    if self.chatId is not None:
       self.bot.send_message(chat_id=self.chatId, text=msg)
