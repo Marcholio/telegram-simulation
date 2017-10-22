@@ -19,7 +19,7 @@ bots = {}
 for u in generator.users:
   start = time()
   print 'Initializing %s bot' % u
-  bots[u] = TelegramBot(u, tokens[u])
+  bots[u] = TelegramBot(tokens[u])
   print 'Bot initialized (%.2f s)' % float(time() - start)
 
 for i in range(10):

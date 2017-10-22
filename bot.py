@@ -3,10 +3,9 @@ from telegram import Bot
 from telegram.ext import CommandHandler, Updater
 
 class TelegramBot:
-  def __init__(self, user, token):
+  def __init__(self, token):
     self.updater = Updater(token=token)
     self.bot = Bot(token)
-    self.user = user
     startHandler = CommandHandler('start', self.start)
     stopHandler = CommandHandler('stop', self.stop)
     self.updater.dispatcher.add_handler(startHandler)
