@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json, sys
 from telegram import Bot
 from telegram.ext import CommandHandler, Updater
@@ -8,6 +10,7 @@ class TelegramBot:
     self.bot = Bot(token)
     startHandler = CommandHandler('start', self.start)
     stopHandler = CommandHandler('stop', self.stop)
+    pingHandler = CommandHandler('ping', self.ping)
     self.updater.dispatcher.add_handler(startHandler)
     self.updater.dispatcher.add_handler(stopHandler)
     self.updater.start_polling()
@@ -19,6 +22,9 @@ class TelegramBot:
   def stop(self, usr, msg):
     self.updater.stop()
     raise SystemExit
+    
+  def ping(self, bot, update):
+    self.sendMessage('jöpjöp')
     
   def sendMessage(self, msg):
     if self.chatId is not None:
